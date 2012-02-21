@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>jQuery Plugin for On-demand Search Box: SeacrhMeme</title>
+    <link href="css/demo.css" rel="stylesheet" type="text/css" />
+    <link href="css/searchMeme.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/jquery.searchMeme.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var searchOrange = $('#search-orange').searchMeme({ onSearch: function (searchText) {
+                setTimeout(function () {
+                    searchOrange.searchMeme({ searchComplete: true });
+                    $('#search-results').html("You searched for " + searchOrange.val() + "");
+                    $('.panel').animate({ 'height': 200 }, 500);
+                }, 3000);
+            }
+            , buttonPlacement: 'left', button: 'orange'
+            });
+
+        var searchGreen = $('#search-green').searchMeme({ onSearch: function (searchText) {
+                setTimeout(function () {
+                    searchGreen.searchMeme({ searchComplete: true });
+                    $('#search-results').html("You searched for " + searchGreen.val() + "");
+                    $('.panel').addClass('go-green').animate({ 'height': 200 }, 500);
+                }, 3000);
+            }
+            , buttonPlacement: 'right', button: 'green'
+            });
+
+        var searchRed = $('#search-red').searchMeme({ onSearch: function (searchText) {
+                setTimeout(function () {
+                    searchRed.searchMeme({ searchComplete: true });
+                    $('#search-results').html("You searched for " + searchRed.val() + "");
+                    $('.panel').animate({ 'height': 200 }, 500, function () {
+
+                        alert('This is demo 3');
+                    });
+
+                }, 3000);
+            }
+            , buttonPlacement: 'left', button: 'red'
+            });
+
+            $('.wrapper-green,.wrapper-red').css('display', 'none');
+
+            $('a').click(function () {
+                $('.panel').removeClass('go-green');
+                $('.wrapper-orange,.wrapper-green,.wrapper-red').css('display', 'none');
+                if ($(this).attr('class') == 'search-orange')
+                    $('.wrapper-orange').css('display', '');
+                else if ($(this).attr('class') == 'search-green')
+                    $('.wrapper-green').css('display', '');
+                else if ($(this).attr('class') == 'search-red')
+                    $('.wrapper-red').css('display', '');
+
+                $('.panel').html('Search results here...').animate({ 'height': 100 }, 500);
+                return false;
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        <a href="#" class="search-orange" style="margin-left: 100px">Demo 1</a><a href="#"
+            class="search-green">Demo 2</a><a href="#" class="search-red">Demo 3</a>
+        <div class="demo">
+            <input type="text" id="search-orange" />
+            <input type="text" id="search-green" />
+            <input type="text" id="search-red" />
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+    <div class="panel" id="search-results">
+        Search results here...
+    </div>
+	<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21576262-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
